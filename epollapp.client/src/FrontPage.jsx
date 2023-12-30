@@ -1,41 +1,55 @@
-
+// FrontPage.jsx
 import React, { useState } from 'react';
-import axios from 'axios'; // Import axios for making HTTP requests
+import axios from 'axios';
 
-import './FrontPage.css';
 
 const FrontPage = () => {
-    const [gettingDefaultPoll, setGettingDefaultPoll] = useState(false);
+    const [poll, setPoll] = useState(null);
 
-    const handleGetDefaultPoll = async () => {
+    const handleAddDefaultPoll = async () => {
         try {
-            setGettingDefaultPoll(true);
-
-            // Make a GET request to your C# backend to get the default poll
-            const response = await axios.get('/api/Polls/default');
-
-            const defaultPoll = response.data;
-
-            console.log(defaultPoll); // Log the default poll
-
-            // You can add additional logic or set the state based on the default poll
-
+            const response = await axios.get('http://localhost:5080/api/polls/default');
+            setPoll(response.data);
         } catch (error) {
-            console.error('Error getting default poll:', error);
-        } finally {
-            setGettingDefaultPoll(false);
+            console.error('Error fetching default poll:', error);
+        }
+    };
+
+    const handleVote = async (pollId, optionId) => {
+        try {
+            // Send a vote request to the backend VotesController
+            await axios.post(`http://localhost:5080/api/votes/${pollId}/vote/${optionId}`);
+
+            // Refresh the poll after voting
+            const response = await axios.get('http://localhost:5080/api/polls/default');
+            setPoll(response.data);
+        } catch (error) {
+            console.error('Error voting:', error);
         }
     };
 
 
     return (
-        <div className="front-page">
+        <div>
             <h1>ePollApp</h1>
-            <button>Add your own poll</button>
-            <button onClick={handleGetDefaultPoll} disabled={gettingDefaultPoll}>{gettingDefaultPoll ? 'Getting Default Poll...' : 'Get Default Poll'}
-            </button>
+            <button onClick={handleAddDefaultPoll}>Add Default Poll</button>
+            {poll && (
+                <div>
+                    <h2>{poll.title}</h2>
+                    <ul>
+                        {poll.options.map((option) => (
+                            <li key={option.id}>
+                                {option.title} - Votes: {option.votes}
+                                <button onClick={() => handleVote(poll.id, option.id)}>Vote</button>
+                            </li>
+                        ))}
+
+                    </ul>
+                </div>
+            )}
         </div>
     );
 };
+
 
 export default FrontPage;

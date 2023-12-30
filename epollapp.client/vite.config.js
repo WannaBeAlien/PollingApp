@@ -1,10 +1,11 @@
 import { fileURLToPath, URL } from 'node:url';
+
 import { defineConfig } from 'vite';
-import pluginReact from '@vitejs/plugin-react';
+import plugin from '@vitejs/plugin-react';
 import fs from 'fs';
 import path from 'path';
 import child_process from 'child_process';
-import ViteImpPlugin from 'vite-plugin-imp';
+
 
 const baseFolder =
     process.env.APPDATA !== undefined && process.env.APPDATA !== ''
@@ -38,17 +39,7 @@ if (!fs.existsSync(certFilePath) || !fs.existsSync(keyFilePath)) {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [
-        pluginReact(),
-        ViteImpPlugin({
-            libList: [
-                {
-                    libName: 'axios',
-                    style: (name) => `axios/dist/axios.min.css`,
-                },
-            ],
-        }),
-    ],
+    plugins: [plugin()],
     resolve: {
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url))
@@ -60,5 +51,6 @@ export default defineConfig({
             key: fs.readFileSync(keyFilePath),
             cert: fs.readFileSync(certFilePath),
         }
-    },
-});
+    }
+
+})

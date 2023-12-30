@@ -46,7 +46,19 @@ namespace ePollApp.Server.Controllers
         [HttpGet("default")]
         public ActionResult<Poll> GetDefaultPoll()
         {
-            var defaultPoll = _pollService.GetDefaultPoll(); 
+            var defaultPoll = new Poll
+            {
+                Title = "Favorite Programming Language",
+                Options = new List<PollOption>
+            {
+                new PollOption {Id = 0, Title = "JavaScript", Votes = 0 },
+                new PollOption {Id = 1, Title = "Python", Votes = 0 },
+                new PollOption {Id = 2, Title = "Java", Votes = 0 },
+                new PollOption {Id = 3, Title = "C#", Votes = 0 },
+                new PollOption {Id = 4, Title = "Ruby", Votes = 0 }
+            }
+            };
+
             if (defaultPoll == null)
             {
                 return NotFound();
