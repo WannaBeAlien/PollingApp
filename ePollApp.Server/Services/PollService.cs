@@ -18,7 +18,7 @@ public class PollService : IPollService
     {
         var defaultPoll = new Poll
         {
-            Id = 0,
+            Id = 1,
             Title = "Favorite Programming Language",
             Options = new List<PollOption>
             {

@@ -48,6 +48,7 @@ namespace ePollApp.Server.Controllers
         {
             var defaultPoll = new Poll
             {
+                Id = 1,
                 Title = "Favorite Programming Language",
                 Options = new List<PollOption>
             {
