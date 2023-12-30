@@ -21,11 +21,11 @@ public class PollService : IPollService
             Title = "Favorite Programming Language",
             Options = new List<PollOption>
             {
-                new PollOption { Title = "JavaScript", Votes = 0 },
-                new PollOption { Title = "Python", Votes = 0 },
-                new PollOption { Title = "Java", Votes = 0 },
-                new PollOption { Title = "C#", Votes = 0 },
-                new PollOption { Title = "Ruby", Votes = 0 }
+                new PollOption {Id = 0, Title = "JavaScript", Votes = 0 },
+                new PollOption {Id = 1, Title = "Python", Votes = 0 },
+                new PollOption {Id = 2, Title = "Java", Votes = 0 },
+                new PollOption {Id = 3, Title = "C#", Votes = 0 },
+                new PollOption {Id = 4, Title = "Ruby", Votes = 0 }
             }
         };
 
@@ -48,6 +48,14 @@ public class PollService : IPollService
         _polls.Add(poll);
         return poll;
     }
+    public Poll GetDefaultPoll()
+    {
+        
+        AddDefaultPoll();
+
+        
+        return _polls.FirstOrDefault();
+    }
 
     public Poll Vote(int pollId, int optionId)
     {
@@ -66,5 +74,5 @@ public class PollService : IPollService
         return poll;
     }
 
-    // Add other method implementations as needed
+    
 }

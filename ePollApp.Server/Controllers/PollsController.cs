@@ -1,15 +1,16 @@
 ﻿using ePollApp.Server.Models;
 using ePollApp.Server.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace ePollApp.Server.Controllers
 {
-    // Controllers/PollsController.cs
+    
     [ApiController]
     [Route("api/[controller]")]
     public class PollsController : ControllerBase
     {
-        private readonly IPollService _pollService; // Replace with your own service or repository
+        private readonly IPollService _pollService; 
 
         public PollsController(IPollService pollService)
         {
@@ -42,7 +43,17 @@ namespace ePollApp.Server.Controllers
             return CreatedAtAction(nameof(GetPollById), new { id = addedPoll.Id }, addedPoll);
         }
 
-        // Implement other actions for updating and deleting polls
+        [HttpGet("default")]
+        public ActionResult<Poll> GetDefaultPoll()
+        {
+            var defaultPoll = _pollService.GetDefaultPoll(); 
+            if (defaultPoll == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(defaultPoll);
+        }
     }
 
 

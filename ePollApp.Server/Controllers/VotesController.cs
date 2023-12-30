@@ -9,7 +9,7 @@ namespace ePollApp.Server.Controllers
     [Route("api/[controller]")]
     public class VotesController : ControllerBase
     {
-        private readonly IPollService _pollService; // Replace with your own service or repository
+        private readonly IPollService _pollService; 
 
         public VotesController(IPollService pollService)
         {

@@ -1,4 +1,5 @@
 ﻿
+using ePollApp.Server.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -7,9 +8,17 @@ using Microsoft.Extensions.Hosting;
 
 namespace ePollApp.Server
 {
-    public class startup
+    public class Startup
     {
-        // Startup.cs
+
+        public void ConfigureServices(IServiceCollection services)
+        {
+            
+            /*services.AddScoped<IPollService, PollService>();
+            services.AddHttpContextAccessor();*/ // Ended up being unnecessary?
+        }
+
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
@@ -24,8 +33,12 @@ namespace ePollApp.Server
             
 
             app.UseRouting();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
-            
+
         }
 
 

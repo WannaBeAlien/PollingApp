@@ -9,7 +9,9 @@ namespace ePollApp.Server.Services
         Poll GetPollById(int id);
         Poll AddPoll(Poll poll);
         Poll Vote(int pollId, int optionId);
-        // Add other methods as needed
+        Poll GetDefaultPoll();
+
+        
     }
 
 }

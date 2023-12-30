@@ -1,6 +1,6 @@
 @ePollApp.Server_HostAddress = http://localhost:5080
 
-GET {{ePollApp.Server_HostAddress}}/weatherforecast/
+GET {{ePollApp.Server_HostAddress}}/ePollApp/
 Accept: application/json
 
 ###
