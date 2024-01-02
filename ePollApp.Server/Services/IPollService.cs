@@ -2,7 +2,7 @@
 
 namespace ePollApp.Server.Services
 {
-    // Services/IPollService.cs
+    
     public interface IPollService
     {
         IEnumerable<Poll> GetPolls();

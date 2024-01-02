@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ePollApp.Server.Controllers
 {
-    // Controllers/VotesController.cs
+    
     [ApiController]
     [Route("api/[controller]")]
     public class VotesController : ControllerBase
