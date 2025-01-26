@@ -1,4 +1,4 @@
-# React + Vite
+# Polling app
 
 This project was created with Visual Studio using the React and .NET templates.
 
