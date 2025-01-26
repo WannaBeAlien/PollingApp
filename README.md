@@ -17,3 +17,5 @@ POST /api/polls/add: Add a new poll.
 
 Voting
 POST /api/votes/{pollId}/vote/{optionId}: Vote for an option in a poll.
+
+Made originally as a part of a job interview for Evitec
